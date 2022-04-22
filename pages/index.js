@@ -6,8 +6,8 @@ import styles from '../styles/Home.module.css'
 function Overlay() {
   return (
     <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
-      <a href="https://pmnd.rs/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
-        pmnd.rs
+      <a href="https://zachdillon.dev/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
+        zachdillon.dev
         <br />
         dev collective
       </a>
@@ -19,9 +19,6 @@ function Overlay() {
 
 export default function Home() {
   return (
-    <>
       <Viewer />
-      <Overlay />
-    </>
   )
 }

@@ -1,12 +1,12 @@
+import { useState, useEffect } from 'react';
 import * as THREE from 'three'
-import React, { useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
 import { LayerMaterial, Depth, Noise } from 'lamina'
 
 export default function Viewer() {
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 0], fov: 22 }}>
+    <Canvas dpr={[1, 2]} style={{ height: '100%', width: '100%' }} camera={{ position: [0, 0, 10], fov: 22 }}>
       <Bg />
     </Canvas>
   )
