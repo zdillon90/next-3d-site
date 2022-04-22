@@ -9,7 +9,7 @@ function Overlay() {
       <a href="https://zachdillon.dev/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
         zachdillon.dev
         <br />
-        dev collective
+        Developer
       </a>
       <div style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>ZHD</div>
       <div style={{ position: 'absolute', bottom: 40, right: 40, fontSize: '13px' }}>07/02/2022</div>
@@ -19,6 +19,9 @@ function Overlay() {
 
 export default function Home() {
   return (
-      <Viewer />
+      <>
+        <Viewer className="Bg"/>
+        <Overlay />
+      </>
   )
 }
