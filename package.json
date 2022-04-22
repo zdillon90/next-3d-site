@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.5.1",
     "@react-three/fiber": "^8.0.10",
+    "lamina": "^1.1.15",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
