@@ -6,7 +6,7 @@ import { LayerMaterial, Depth, Noise } from 'lamina'
 
 export default function Viewer() {
   return (
-    <Canvas dpr={[1, 2]} style={{ height: '100%', width: '100%' }} camera={{ position: [0, 0, 10], fov: 22 }}>
+    <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100%' }} camera={{ position: [0, 0, 10], fov: 22 }}>
       <Bg />
     </Canvas>
   )
