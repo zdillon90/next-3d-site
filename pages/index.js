@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Viewer from '../components/viewer'
+import Viewer from '../components/Viewer'
 import styles from '../styles/Home.module.css'
 
 function Overlay() {
   return (
     <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
-      <a href="https://zachdillon.dev/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
+      <a href="https://zachdillon.dev/" style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '13px' }}>
         zachdillon.dev
         <br />
         @zachhdillon
@@ -20,7 +20,7 @@ function Overlay() {
 export default function Home() {
   return (
       <>
-        <Viewer className="Bg"/>
+        <Viewer />
         <Overlay />
       </>
   )
