@@ -1,5 +1,20 @@
-import { PrismaClient } from '@prisma/client'
+import {
+    FormControl,
+    FormLabel,
+    FormErrorMessage,
+    FormHelperText,
+    Input,
+    Box
+  } from '@chakra-ui/react'
 
-const prisma = PrismaClient()
-
-export default function Ama() {}
+export default function Ama() {
+    return (
+        <Box w='50%'>
+            <FormControl>
+                <FormLabel htmlFor='email'>Email address</FormLabel>
+                <Input id='email' type='email' />
+                <FormHelperText>We'll never share your email.</FormHelperText>
+            </FormControl>
+        </Box>
+    )
+}
