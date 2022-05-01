@@ -6,12 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-client": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
+    "migrate": "DATABASE_URL=postgres://nobtzyblpldykv:11482410a2ac3f582bf0c22922e512ad97c089016d5dfd93f7bf5207e82a4248@ec2-54-80-122-11.compute-1.amazonaws.com:5432/dbd3673ui7bb8n prisma migrate deploy"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.8",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "@prisma/client": "^3.13.0",
     "@react-three/drei": "^9.5.1",
     "@react-three/fiber": "^8.0.10",
+    "framer-motion": "^6.3.3",
     "lamina": "^1.1.15",
     "next": "12.1.4",
     "react": "18.0.0",
