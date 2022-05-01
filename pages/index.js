@@ -11,7 +11,7 @@ function Overlay() {
         <br />
         @zachhdillon
       </a>
-      <div style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>ZHD</div>
+      <div style={{ color: 'black', position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>ZHD</div>
       <div style={{ position: 'absolute', bottom: 40, right: 40, fontSize: '13px' }}>07/02/2022</div>
     </div>
   )
