@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import {
     FormControl,
     FormLabel,
@@ -15,6 +16,9 @@ import {
     Divider,
     Button,
   } from '@chakra-ui/react'
+
+
+// Send an email once I answer a question using edge functions
 
 export default function Ama() {
     const [question, setQuestion] = useState('')
