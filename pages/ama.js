@@ -22,7 +22,7 @@ import {
 // Send an email once I answer a question using edge functions
 // Be able to remove questions from the list
 
-// const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 // function useGetQuestions () {
 //     const { data, error } = useSWR('/api/getQuestions', fetcher)
@@ -34,18 +34,19 @@ import {
 //     }
 // }
 
-// function useGetUser (id) {
-//     const { data, error } = useSWR('/api/getUser', fetcher)
+function useGetUser (id) {
+    const { data, error } = useSWR(`/api/user/${id}`, fetcher)
 
-//     return {
-//         user: data,
-//         isLoading: !error && !data,
-//         isError: error,
-//     }
-// }
+    return {
+        user: data,
+        isLoading: !error && !data,
+        isError: error,
+    }
+}
 
 export async function getServerSideProps() {
     const questions = await prisma.question.findMany()
+    // const users = await prisma.user.findMany()
     return { props: { questions } }
 }
 
@@ -53,10 +54,13 @@ export default function Ama({ questions }) {
     const [question, setQuestion] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    // console.log(questions)
+    // console.log(users)
     // const { questions, isLoading, isError } = useGetQuestions()
+    const { user, isLoading, isError } = useGetUser(3)
   
-    // if (isLoading) return <div>failed to load</div>
-    // if (isError) return <div>loading...</div>
+    if (isLoading) return <div>failed to load</div>
+    if (isError) return <div>loading...</div>
 
     return (
         <Center>
@@ -91,7 +95,7 @@ export default function Ama({ questions }) {
                         fontSize="xl"
                         fontWeight="bold"
                     >
-                        Name
+                        Name: {user.name}
                     </Text>
                     <Flex align="baseline" mt={2}>
                         <Badge colorScheme="pink">Q</Badge>
