@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
+import prisma from '../lib/prisma'
 import {
     FormControl,
     FormLabel,
@@ -21,27 +22,41 @@ import {
 // Send an email once I answer a question using edge functions
 // Be able to remove questions from the list
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+// const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-function useQuestion () {
-    const { data, error } = useSWR('/api/getQuestions', fetcher)
+// function useGetQuestions () {
+//     const { data, error } = useSWR('/api/getQuestions', fetcher)
     
-    return {
-        questions: data,
-        isLoading: !error && !data,
-        isError: error,
-    }
+//     return {
+//         questions: data,
+//         isLoading: !error && !data,
+//         isError: error,
+//     }
+// }
+
+// function useGetUser (id) {
+//     const { data, error } = useSWR('/api/getUser', fetcher)
+
+//     return {
+//         user: data,
+//         isLoading: !error && !data,
+//         isError: error,
+//     }
+// }
+
+export async function getServerSideProps() {
+    const questions = await prisma.question.findMany()
+    return { props: { questions } }
 }
 
-export default function Ama() {
+export default function Ama({ questions }) {
     const [question, setQuestion] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const { questions, isLoading, isError } = useQuestion()
+    // const { questions, isLoading, isError } = useGetQuestions()
   
-    if (isLoading) return <div>failed to load</div>
-    if (isError) return <div>loading...</div>
-
+    // if (isLoading) return <div>failed to load</div>
+    // if (isError) return <div>loading...</div>
 
     return (
         <Center>
@@ -99,7 +114,7 @@ export default function Ama() {
                             // fontWeight="bold"
                             // color="pink.800"
                         >
-                            Sofishticated
+                            {questions[0].answer}
                         </Text>
                     </Flex>
                 </Box>
