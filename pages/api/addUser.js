@@ -5,7 +5,7 @@ export default async function handler(req, res) {
         data: {
             email: "zdillon90@gmail.com",
             name: "Zach Dillon",
-            admin: true  
+            admin: false,  
         },
     });
     res.json(result);

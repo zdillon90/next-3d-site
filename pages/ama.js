@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
 import prisma from '../lib/prisma'
+import Question from '../components/Question'
 import {
     FormControl,
     FormLabel,
@@ -46,7 +47,6 @@ function useGetUser (id) {
 
 export async function getServerSideProps() {
     const questions = await prisma.question.findMany()
-    // const users = await prisma.user.findMany()
     return { props: { questions } }
 }
 
@@ -58,7 +58,21 @@ export default function Ama({ questions }) {
     // console.log(users)
     // const { questions, isLoading, isError } = useGetQuestions()
     const { user, isLoading, isError } = useGetUser(3)
-  
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+        const body = { question, name, email }
+        await fetch(`/api/postQuestion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     if (isLoading) return <div>failed to load</div>
     if (isError) return <div>loading...</div>
 
@@ -68,14 +82,27 @@ export default function Ama({ questions }) {
                 <Heading p='2'>Ask Me Anything</Heading>
                     <FormControl>
                         <FormLabel>Question</FormLabel>
-                        <Textarea id='question' placeholder='Feel free to ask your question here' />
+                        <Textarea 
+                            id='question' 
+                            placeholder='Feel free to ask your question here' 
+                            onChange={e => setQuestion(e.target.value)}
+                        />
                         <FormLabel>Name</FormLabel>
-                        <Input id='name' type='email' />
+                        <Input 
+                            id='name' 
+                            type='email'
+                            onChange={e => setName(e.target.value)} 
+                        />
                         <FormLabel htmlFor='email'>Email address</FormLabel>
-                        <Input id='email' type='email' />
+                        <Input 
+                            id='email' 
+                            type='email'
+                            onChange={e => setEmail(e.target.value)} 
+                        />
                         <FormHelperText>I&apos;ll never share your email.</FormHelperText>
                         <Flex justify='flex-end'>
                             <Button
+                                disabled={!question || !name || !email}
                                 mt={4}
                                 bg='white'
                                 variant='outline'
@@ -90,38 +117,10 @@ export default function Ama({ questions }) {
                         <Divider orientation='horizontal' />
                     </Center>
                 <Heading p='2'>Questions</Heading>
-                <Box p="5"  borderWidth="2px">
-                    <Text
-                        fontSize="xl"
-                        fontWeight="bold"
-                    >
-                        Name: {user.name}
-                    </Text>
-                    <Flex align="baseline" mt={2}>
-                        <Badge colorScheme="pink">Q</Badge>
-                        <Text
-                            ml={2}
-                            // textTransform="uppercase"
-                            fontSize="md"
-                            // fontWeight="bold"
-                            color="pink.800"
-                        >
-                            {questions[0].question}
-                        </Text>
-                    </Flex>
-                    <Flex align="baseline" mt={2}>
-                        <Badge colorScheme="green">A</Badge>
-                        <Text
-                            ml={2}
-                            // textTransform="uppercase"
-                            fontSize="md"
-                            // fontWeight="bold"
-                            // color="pink.800"
-                        >
-                            {questions[0].answer}
-                        </Text>
-                    </Flex>
-                </Box>
+                <Question 
+                    question={questions[0].question} 
+                    answer={questions[0].answer} 
+                />
             </Box>
         </Center>
     )
