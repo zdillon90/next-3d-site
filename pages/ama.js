@@ -18,6 +18,7 @@ import {
     Textarea,
     Divider,
     Button,
+    useColorMode
   } from '@chakra-ui/react'
 
 
@@ -118,7 +119,7 @@ function QuestionForm () {
                     <Button
                         // disabled={!question || !name || !email}
                         mt={4}
-                        bg='white'
+                        // bg='white'
                         variant='outline'
                         // isLoading={props.isSubmitting}
                         type='submit'
@@ -138,14 +139,16 @@ export default function Ama({ questions }) {
     // console.log(questions)
     // console.log(users)
     // const { questions, isLoading, isError } = useGetQuestions()
-    const { user, isLoading, isError } = useGetUser(3)
-
-    if (isLoading) return <div>failed to load</div>
-    if (isError) return <div>loading...</div>
+    const { colorMode, toggleColorMode } = useColorMode()
 
     return (
         <Center>
             <Box w='50vh' m='20'>
+                <header>
+                    <Button onClick={toggleColorMode}>
+                        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+                    </Button>
+                </header>
                 <Heading p='2'>Ask Me Anything</Heading>
                     <QuestionForm />
                     <Center height='50px'>

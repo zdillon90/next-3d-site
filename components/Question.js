@@ -26,10 +26,10 @@ export default function Question({question, answer, userId}) {
     return (
         <Box p="5"  borderWidth="2px">
             <Text
-                fontSize="xl"
-                fontWeight="bold"
+                fontSize="l"
+                // fontWeight="bold"
             >
-                Name: {user.name}
+                Asker: {user.name}
             </Text>
             <Flex align="baseline" mt={2}>
                 <Badge colorScheme="pink">Q</Badge>
@@ -38,7 +38,7 @@ export default function Question({question, answer, userId}) {
                     // textTransform="uppercase"
                     fontSize="md"
                     // fontWeight="bold"
-                    color="pink.800"
+                    color="pink.500"
                 >
                     {question}
                 </Text>
@@ -50,7 +50,7 @@ export default function Question({question, answer, userId}) {
                     // textTransform="uppercase"
                     fontSize="md"
                     // fontWeight="bold"
-                    // color="pink.800"
+                    color="green.500"
                 >
                     {answer}
                 </Text>
