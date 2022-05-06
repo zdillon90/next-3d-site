@@ -19,8 +19,8 @@ function useGetUser (id) {
     }
 }
   
-export default function Question({question, answer}) {
-    const { user, isLoading, isError } = useGetUser(3)
+export default function Question({question, answer, userId}) {
+    const { user, isLoading, isError } = useGetUser(userId)
     if (isLoading) return <div>failed to load</div>
     if (isError) return <div>loading...</div>
     return (

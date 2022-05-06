@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
+import { useFormik } from 'formik'
 import prisma from '../lib/prisma'
 import Question from '../components/Question'
 import {
@@ -50,6 +51,86 @@ export async function getServerSideProps() {
     return { props: { questions } }
 }
 
+function QuestionList ({ questions }) {
+    return (
+        <Flex flexDirection="column">
+            {questions.map(question => (
+                <Question 
+                    key={question.id}
+                    userId={question.userId}
+                    question={question.question} 
+                    answer={question.answer} 
+                />
+            ))}
+        </Flex>
+    )
+}
+
+
+function QuestionForm () {
+    const formik = useFormik({
+        initialValues: {
+            question: '',
+            name: '',
+            email: '',
+        },
+        onSubmit: async (values) => {
+            // alert(JSON.stringify(values, null, 2))
+            try {
+                // const body = { question, name, email }
+                await fetch(`/api/postQuestion`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(values),
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        },
+    })
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <FormControl>
+                <FormLabel>Question</FormLabel>
+                <Textarea 
+                    id='question'
+                    type='text'
+                    placeholder='Feel free to ask your question here' 
+                    onChange={formik.handleChange}
+                    value={formik.values.question}
+                />
+                <FormLabel>Name</FormLabel>
+                <Input 
+                    id='name' 
+                    type='name'
+                    onChange={formik.handleChange} 
+                    value={formik.values.name}
+                />
+                <FormLabel htmlFor='email'>Email address</FormLabel>
+                <Input 
+                    id='email' 
+                    type='email'
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                />
+                <FormHelperText>I&apos;ll never share your email.</FormHelperText>
+                <Flex justify='flex-end'>
+                    <Button
+                        // disabled={!question || !name || !email}
+                        mt={4}
+                        bg='white'
+                        variant='outline'
+                        // isLoading={props.isSubmitting}
+                        type='submit'
+                    >
+                        Submit
+                    </Button>
+                </Flex>
+            </FormControl>
+        </form>
+    )
+}
+
 export default function Ama({ questions }) {
     const [question, setQuestion] = useState('')
     const [name, setName] = useState('')
@@ -59,20 +140,6 @@ export default function Ama({ questions }) {
     // const { questions, isLoading, isError } = useGetQuestions()
     const { user, isLoading, isError } = useGetUser(3)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        try {
-        const body = { question, name, email }
-        await fetch(`/api/postQuestion`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-            })
-        } catch (err) {
-            console.error(err)
-        }
-    }
-
     if (isLoading) return <div>failed to load</div>
     if (isError) return <div>loading...</div>
 
@@ -80,47 +147,16 @@ export default function Ama({ questions }) {
         <Center>
             <Box w='50vh' m='20'>
                 <Heading p='2'>Ask Me Anything</Heading>
-                    <FormControl>
-                        <FormLabel>Question</FormLabel>
-                        <Textarea 
-                            id='question' 
-                            placeholder='Feel free to ask your question here' 
-                            onChange={e => setQuestion(e.target.value)}
-                        />
-                        <FormLabel>Name</FormLabel>
-                        <Input 
-                            id='name' 
-                            type='email'
-                            onChange={e => setName(e.target.value)} 
-                        />
-                        <FormLabel htmlFor='email'>Email address</FormLabel>
-                        <Input 
-                            id='email' 
-                            type='email'
-                            onChange={e => setEmail(e.target.value)} 
-                        />
-                        <FormHelperText>I&apos;ll never share your email.</FormHelperText>
-                        <Flex justify='flex-end'>
-                            <Button
-                                disabled={!question || !name || !email}
-                                mt={4}
-                                bg='white'
-                                variant='outline'
-                                // isLoading={props.isSubmitting}
-                                type='submit'
-                            >
-                                Submit
-                            </Button>
-                        </Flex>
-                    </FormControl>
+                    <QuestionForm />
                     <Center height='50px'>
                         <Divider orientation='horizontal' />
                     </Center>
                 <Heading p='2'>Questions</Heading>
-                <Question 
+                <QuestionList questions={questions} />
+                {/* <Question 
                     question={questions[0].question} 
                     answer={questions[0].answer} 
-                />
+                /> */}
             </Box>
         </Center>
     )

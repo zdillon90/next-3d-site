@@ -17,6 +17,7 @@
     "@prisma/client": "^3.13.0",
     "@react-three/drei": "^9.5.1",
     "@react-three/fiber": "^8.0.10",
+    "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "lamina": "^1.1.15",
     "next": "12.1.4",
