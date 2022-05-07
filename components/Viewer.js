@@ -1,19 +1,28 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls, Text } from '@react-three/drei'
 import { LayerMaterial, Depth, Noise } from 'lamina'
+import dynamic from 'next/dynamic'
 
 import Gyroid from '../components/Gyroid'
+// import StarField from './StarField';
+
+const StarField = dynamic(
+  () => import('./StarField'),
+  { ssr: false }
+)
 
 export default function Viewer() {
   return (
-    <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100%' }} camera={{ position: [0, 0, 10], fov: 22 }}>
-      <Bg />
+    <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100%' }}>
+      {/* <Bg /> */}
       <Suspense fallback={null}>
         {/* <Gyroid /> */}
-        <Rig />
-        <Environment preset="sunset" background />
+        <StarField />
+        <MyRotatingBox />
+        {/* <Rig /> */}
+        {/* <Environment preset="sunset" background /> */}
       </Suspense>
     </Canvas>
   )
@@ -35,4 +44,19 @@ function Rig({ v = new THREE.Vector3() }) {
   return useFrame((state) => {
     state.camera.position.lerp(v.set(state.mouse.x / 2, state.mouse.y / 2, 10), 0.05)
   })
+}
+
+function MyRotatingBox() {
+  const myMesh = useRef();
+
+  useFrame(({ clock }) => {
+    const a = clock.getElapsedTime();
+    myMesh.current.rotation.y = a;
+  });
+
+  return (
+    <mesh ref={myMesh}>
+      <StarField />
+    </mesh>
+  );
 }

@@ -11,12 +11,16 @@
     "migrate": "DATABASE_URL=postgres://nobtzyblpldykv:11482410a2ac3f582bf0c22922e512ad97c089016d5dfd93f7bf5207e82a4248@ec2-54-80-122-11.compute-1.amazonaws.com:5432/dbd3673ui7bb8n prisma migrate deploy"
   },
   "dependencies": {
+    "@asyncapi/react-component": "^0.24.22",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@prisma/client": "^3.13.0",
     "@react-three/drei": "^9.5.1",
     "@react-three/fiber": "^8.0.10",
+    "@splinetool/r3f-spline": "^1.0.1",
+    "@splinetool/react-spline": "^2.1.0",
+    "@splinetool/runtime": "^0.9.42",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.3",
     "lamina": "^1.1.15",
