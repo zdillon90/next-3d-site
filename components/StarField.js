@@ -519,7 +519,7 @@ export default function StarField({ ...props }) {
             rotation={[0, -0.06, 0]}
           />
         </group>
-        <PerspectiveCamera
+        {/* <PerspectiveCamera
           name="Camera"
           makeDefault={true}
           far={100000}
@@ -527,7 +527,7 @@ export default function StarField({ ...props }) {
           fov={45}
           position={[958.9, 264, -103.99]}
           rotation={[-1.95, 1.28, 1.96]}
-        />
+        /> */}
         <hemisphereLight name="Default Ambient Light" intensity={10} position={[0, 1, 0]} />
       </group>
     </>
