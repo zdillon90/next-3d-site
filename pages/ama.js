@@ -143,7 +143,7 @@ export default function Ama({ questions }) {
 
     return (
         <Center>
-            <Box w='50vh' m='20'>
+            <Box w='80vh' m='20' p='10' overflowY="auto" maxHeight="80vh">
                 <header>
                     <Button onClick={toggleColorMode}>
                         Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
