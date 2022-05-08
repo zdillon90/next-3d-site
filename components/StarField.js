@@ -32,7 +32,7 @@ export default function StarField({ ...props }) {
   const { nodes, materials } = useSpline('https://prod.spline.design/pJsrrR4cpInxEWzt/scene.splinecode')
   return (
     <>
-      <color attach="background" args={['#4b4d52']} />
+      {/* <color attach="background" args={['#4b4d52']} /> */}
     {/* <Bloom> */}
       <group {...props} dispose={null}>
         <group name="Group">

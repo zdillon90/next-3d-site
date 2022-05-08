@@ -1,9 +1,10 @@
 import { useState, useEffect, Suspense, useRef } from 'react';
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree, extend } from '@react-three/fiber'
-import { Environment, OrbitControls, Text, PerspectiveCamera} from '@react-three/drei'
-import { LayerMaterial, Depth, Noise } from 'lamina'
+import { Environment, OrbitControls, Text, PerspectiveCamera, useTexture} from '@react-three/drei'
+import { LayerMaterial, Depth, Noise, Texture } from 'lamina'
 import dynamic from 'next/dynamic'
+import Image from 'next/image';
 
 const StarField = dynamic(
   () => import('./StarField'),
@@ -13,7 +14,9 @@ const StarField = dynamic(
 export default function Viewer() {
   return (
     <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100%' }}>
+      {/* <Bg /> */}
       <color attach="background" args={['#4b4d52']} />
+      {/* <Image src='/public/photo.jpeg' alt='space' height='100%' width='100%'/> */}
       <PerspectiveCamera
           name="Camera"
           makeDefault={true}
@@ -24,6 +27,7 @@ export default function Viewer() {
           rotation={[-1.95, 1.28, 1.96]}
           />
       <Suspense fallback={null}>
+        {/* <Background /> */}
         <MyRotatingBox />
       </Suspense>
     </Canvas>
@@ -31,11 +35,16 @@ export default function Viewer() {
 }
 
 function Bg() {
+  const texture = new THREE.TextureLoader().load( "/public/photo.jpeg" );
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set( 4, 4 );
   return (
     <mesh scale={100}>
-      <boxGeometry args={[1, 1, 1]} />
+      <boxGeometry args={[1000, 1000, 1000]} />
       <LayerMaterial side={THREE.BackSide}>
-        <Depth colorB="red" colorA="skyblue" alpha={1} mode="normal" near={130} far={200} origin={[100, 100, -100]} />
+        <Texture map={texture}/>
+        {/* <Depth colorB="red" colorA="skyblue" alpha={1} mode="normal" near={130} far={200} origin={[100, 100, -100]} /> */}
         {/* <Noise mapping="local" type="white" scale={1000} colorA="white" colorB="black" mode="subtract" alpha={0.2} /> */}
       </LayerMaterial>
     </mesh>
