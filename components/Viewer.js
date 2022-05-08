@@ -1,12 +1,14 @@
 import { useState, useEffect, Suspense, useRef } from 'react';
 import * as THREE from 'three'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useThree, extend } from '@react-three/fiber'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 import { Environment, OrbitControls, Text, PerspectiveCamera} from '@react-three/drei'
 import { LayerMaterial, Depth, Noise } from 'lamina'
 import dynamic from 'next/dynamic'
 
-import Gyroid from '../components/Gyroid'
-// import StarField from './StarField';
+extend({ EffectComposer, RenderPass, UnrealBloomPass })
 
 const StarField = dynamic(
   () => import('./StarField'),
@@ -61,7 +63,9 @@ function MyRotatingBox() {
 
   useFrame(({ clock }) => {
     const a = clock.getElapsedTime();
-    myMesh.current.rotation.y = a;
+    const b = a * 0.03;
+    // myMesh.current.rotation.x = b;
+    myMesh.current.rotation.y = b;
   });
 
   return (
@@ -69,4 +73,21 @@ function MyRotatingBox() {
       <StarField />
     </mesh>
   );
+}
+
+function Bloom({ children }) {
+  const { gl, camera, size } = useThree()
+  const [scene, setScene] = useState()
+  const composer = useRef()
+  useEffect(() => void scene && composer.current.setSize(size.width, size.height), [size])
+  useFrame(() => scene && composer.current.render(), 1)
+  return (
+    <>
+      <scene ref={setScene}>{children}</scene>
+      <effectComposer ref={composer} args={[gl]}>
+        <renderPass attachArray="passes" scene={scene} camera={camera} />
+        <unrealBloomPass attachArray="passes" args={[undefined, 1.5, 1, 0]} />
+      </effectComposer>
+    </>
+  )
 }
