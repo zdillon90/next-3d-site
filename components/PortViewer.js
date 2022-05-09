@@ -15,7 +15,7 @@ export default function PortViewer() {
   return (
     <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100vw' }}>
       <color attach="background" args={['#4b4d52']} />  
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.6} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={[512, 512]} castShadow />
       <PresentationControls
         global
@@ -24,14 +24,8 @@ export default function PortViewer() {
         rotation={[0, 0.3, 0]}
         polar={[-Math.PI / 3, Math.PI / 3]}
         azimuth={[-Math.PI / 1.4, Math.PI / 2]}>
-        <Angle rotation={[0, -100, 0]} position={[0, 0, 0]} scale={0.05} />
+        <Angle rotation={[0, 0, 0]} position={[0, 0, 0]} scale={0.05} />
       </PresentationControls>
     </Canvas>
   )
-}
-
-function Rig({ v = new THREE.Vector3() }) {
-  return useFrame((state) => {
-    state.camera.position.lerp(v.set(state.mouse.x / 2, state.mouse.y / 2, 10), 0.05)
-  })
 }

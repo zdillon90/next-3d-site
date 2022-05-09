@@ -19,9 +19,7 @@ export default function Model(props) {
         receiveShadow
         geometry={nodes.HeroFoxVariant2.geometry}
         material={materials.material_1}
-        rotation={[-Math.PI, -0.02, Math.PI/2]}
-        // scale={0.1}
-        // position={[-3, 2, -1]}
+        rotation={[-Math.PI / 1.1, -0.02, Math.PI/2]}
         />
   </group>
   );

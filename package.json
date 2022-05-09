@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate-client": "PRISMA_CLIENT_ENGINE_TYPE='dataproxy' prisma generate",
-    "migrate": "DATABASE_URL=postgres://nobtzyblpldykv:11482410a2ac3f582bf0c22922e512ad97c089016d5dfd93f7bf5207e82a4248@ec2-54-80-122-11.compute-1.amazonaws.com:5432/dbd3673ui7bb8n prisma migrate deploy"
+    "migrate": "DATABASE_URL=postgres://nobtzyblpldykv:11482410a2ac3f582bf0c22922e512ad97c089016d5dfd93f7bf5207e82a4248@ec2-54-80-122-11.compute-1.amazonaws.com:5432/dbd3673ui7bb8n prisma migrate deploy",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@asyncapi/react-component": "^0.24.22",
