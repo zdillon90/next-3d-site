@@ -1,8 +1,9 @@
+import * as THREE from 'three'
 import { Canvas } from "@react-three/fiber";
-import { useLoader } from "@react-three/fiber";
-import { Environment, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { useLoader, useFrame } from "@react-three/fiber";
+import { Environment, OrbitControls, PerspectiveCamera, PresentationControls, ContactShadows } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import dynamic from 'next/dynamic'
 
 const Angle = dynamic(
@@ -13,25 +14,24 @@ const Angle = dynamic(
 export default function PortViewer() {
   return (
     <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100vw' }}>
-      {/* <Bg /> */}
-      <color attach="background" args={['#848587']} />
-      {/* <Image src='/public/photo.jpeg' alt='space' height='100%' width='100%'/> */}
-      <PerspectiveCamera
-          name="Camera"
-          makeDefault={true}
-          far={100000}
-          near={5}
-          fov={45}
-          position={[200, 50, 300]}
-          rotation={[-1.95, 1.28, 1.96]}
-          />
-      <Suspense fallback={null}>
-        <Angle />
-        {/* <Background /> */}
-        {/* <MyRotatingBox /> */}
-        <OrbitControls />
-        {/* <Environment preset="sunset" background /> */}
-      </Suspense>
+      <color attach="background" args={['#4b4d52']} />  
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} shadow-mapSize={[512, 512]} castShadow />
+      <PresentationControls
+        global
+        config={{ mass: 2, tension: 500 }}
+        snap={{ mass: 4, tension: 1500 }}
+        rotation={[0, 0.3, 0]}
+        polar={[-Math.PI / 3, Math.PI / 3]}
+        azimuth={[-Math.PI / 1.4, Math.PI / 2]}>
+        <Angle rotation={[0, -100, 0]} position={[0, 0, 0]} scale={0.05} />
+      </PresentationControls>
     </Canvas>
   )
+}
+
+function Rig({ v = new THREE.Vector3() }) {
+  return useFrame((state) => {
+    state.camera.position.lerp(v.set(state.mouse.x / 2, state.mouse.y / 2, 10), 0.05)
+  })
 }

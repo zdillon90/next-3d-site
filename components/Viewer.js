@@ -14,9 +14,7 @@ const StarField = dynamic(
 export default function Viewer() {
   return (
     <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100%' }}>
-      {/* <Bg /> */}
       <color attach="background" args={['#4b4d52']} />
-      {/* <Image src='/public/photo.jpeg' alt='space' height='100%' width='100%'/> */}
       <PerspectiveCamera
           name="Camera"
           makeDefault={true}
@@ -27,7 +25,7 @@ export default function Viewer() {
           rotation={[-1.95, 1.28, 1.96]}
           />
       <Suspense fallback={null}>
-        {/* <Background /> */}
+        {/* <Environment files={['photo.png']} path="/public/" background /> */}
         <MyRotatingBox />
       </Suspense>
     </Canvas>
