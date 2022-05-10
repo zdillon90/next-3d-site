@@ -6,12 +6,13 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Suspense, useRef } from "react";
 import dynamic from 'next/dynamic'
 
-const Angle = dynamic(
-  () => import('./Angle'),
-  { ssr: false }
-)
 
-export default function PortViewer() {
+
+export default function PortViewer(model) {
+  const Angle = dynamic(
+    () => import(`${model.model}`),
+    { ssr: false }
+  )
   return (
     <Canvas dpr={[1, 2]} style={{ height: '100vh', width: '100vw' }}>
       <color attach="background" args={['#4b4d52']} />  

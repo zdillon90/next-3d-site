@@ -5,9 +5,15 @@ import { Environment, OrbitControls, Text, PerspectiveCamera, useTexture} from '
 import { LayerMaterial, Depth, Noise, Texture } from 'lamina'
 import dynamic from 'next/dynamic'
 import Image from 'next/image';
+// import Spline from '@splinetool/react-spline';
 
 const StarField = dynamic(
   () => import('./StarField'),
+  { ssr: false }
+)
+
+const Orbs = dynamic(
+  () => import('./Orbs'),
   { ssr: false }
 )
 
@@ -68,6 +74,7 @@ function MyRotatingBox() {
   return (
     <mesh ref={myMesh}>
       <StarField />
+      {/* <Orbs /> */}
     </mesh>
   );
 }
