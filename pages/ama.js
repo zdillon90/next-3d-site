@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import useSWR from 'swr'
 import { useFormik } from 'formik'
-import prisma from '../lib/prisma'
+// import prisma from '../lib/prisma'
+import { PrismaClient } from '@prisma/client'
 import Question from '../components/Question'
 import {
     FormControl,
@@ -21,6 +22,7 @@ import {
     useColorMode
   } from '@chakra-ui/react'
 
+const prisma = new PrismaClient()
 
 // Send an email once I answer a question using edge functions
 // Be able to remove questions from the list
