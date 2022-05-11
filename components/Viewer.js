@@ -12,8 +12,8 @@ const StarField = dynamic(
   { ssr: false }
 )
 
-const Orbs = dynamic(
-  () => import('./Orbs'),
+const BlackHole = dynamic(
+  () => import('./BlackHole'),
   { ssr: false }
 )
 
@@ -74,7 +74,7 @@ function MyRotatingBox() {
   return (
     <mesh ref={myMesh}>
       <StarField />
-      {/* <Orbs /> */}
+      <BlackHole />
     </mesh>
   );
 }
