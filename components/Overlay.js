@@ -9,17 +9,35 @@ export default function Overlay() {
     today = mm + '/' + dd + '/' + yyyy;
     return (
       <div style={{ color: '#d3d3d3', position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
-        <a href="https://zachdillon.dev/" style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '15px' }}>
-          zachdillon.dev
-          <br />
-          @zachhdillon
-        </a>
         <Link href="/" passHref>
-          <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, left: 40, fontSize: '15px' }}>ZHD</a>
+          <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, left: 40, fontSize: '20px' }}>
+            ZHD
+          </a>
         </Link>
-        <div style={{ color: '#d3d3d3', position: 'absolute', bottom: 40, right: 40, fontSize: '15px' }}>{today}</div>
         <Link href="/ama" passHref>
-          <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, right: 40, fontSize: '15px' }}>AMA</a>
+          <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, right: 40, fontSize: '20px' }}>
+            AMA
+          </a>
+        </Link>
+        <Link href="/portfolio/hf" passHref>
+          <a style={{ position: 'absolute', bottom: 40, left: 40, fontSize: '20px' }}>
+            Hero Forge
+          </a>
+        </Link>
+        <Link href="/portfolio/ck" passHref>
+          <a style={{ position: 'absolute', bottom: 40, left: 300, fontSize: '20px' }}>
+            Cyber Kongz
+          </a>
+        </Link>
+        <Link href="/portfolio/sk" passHref>
+          <a style={{ position: 'absolute', bottom: 40, right: 300, fontSize: '20px' }}>
+            Skyline
+          </a>
+        </Link>
+        <Link href="/portfolio/cv" passHref>
+          <a style={{ color: '#d3d3d3', position: 'absolute', bottom: 40, right: 40, fontSize: '20px' }}>
+            Code Vault
+          </a>
         </Link>
     </div>
     )

@@ -3,6 +3,7 @@ import useSWR from 'swr'
 import { useFormik } from 'formik'
 // import prisma from '../lib/prisma'
 import { PrismaClient } from '@prisma/client'
+import Link from 'next/link'
 import Question from '../components/Question'
 import {
     FormControl,
@@ -144,6 +145,10 @@ export default function Ama({ questions }) {
     const { colorMode, toggleColorMode } = useColorMode()
 
     return (
+    <>
+        <Link href="/" passHref>
+          <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, left: 40, fontSize: '20px' }}>ZHD</a>
+        </Link>
         <Center>
             <Box w='80vh' p='10' overflowY="auto" maxHeight="100vh">
                 <header>
@@ -164,5 +169,6 @@ export default function Ama({ questions }) {
                 /> */}
             </Box>
         </Center>
+    </>
     )
 }

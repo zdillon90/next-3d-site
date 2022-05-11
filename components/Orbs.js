@@ -1,9 +1,13 @@
-import Spline from '@splinetool/react-spline';
+import React, { Suspense } from 'react';
 
-export default function Orbs() {
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
+
+export default function App() {
   return (
     <div>
-      <Spline scene="https://prod.spline.design/ro3WJaOSrjGrpfJm/scene.splinecode" />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Spline scene="https://prod.spline.design/3gBEp9mMnQr0xxJF/scene.splinecode" />
+      </Suspense>
     </div>
   );
 }
