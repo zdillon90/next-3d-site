@@ -3,6 +3,10 @@ import React, { useRef } from "react";
 import { useFrame } from '@react-three/fiber'
 
 export default function Scene({ ...props }) {
+  const scale = [0.1, 0.1, 0.1]
+  const rotation = [1.4, 0.1, -0.1]
+  const position = [0, 0, 17]
+  console.log(position[0])
   const group = useRef();
   const { nodes, materials } = useSpline('https://prod.spline.design/eR-CIHwfBAqGe0Y9/scene.splinecode')
   useFrame((state) => {
@@ -22,7 +26,9 @@ export default function Scene({ ...props }) {
           material={materials['move_tool.png Material']}
           castShadow
           receiveShadow
-          position={[-2.78, 6.01, 26]}
+          position={[position[0] + 0, position[1] + -2.5, position[2] + 1.5]}
+          scale={scale}
+          rotation={rotation}
         />
         <mesh
           name="Cube"
@@ -30,6 +36,9 @@ export default function Scene({ ...props }) {
           material={materials['Cube Material']}
           castShadow
           receiveShadow
+          scale={scale}
+          rotation={rotation}
+          position={position}
         />
         <hemisphereLight name="Default Ambient Light" intensity={0.75} color="#eaeaea" position={[0, 1, 0]} />
       </group>

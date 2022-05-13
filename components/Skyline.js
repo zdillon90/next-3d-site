@@ -4,7 +4,7 @@ import { useFrame } from '@react-three/fiber'
 
 export default function Model(props) {
   const group = useRef();
-  const { nodes, materials } = useGLTF("/Kong.glb");
+  const { nodes, materials } = useGLTF("/skyline.glb");
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
     group.current.rotation.x = -Math.PI / 1.75 + Math.cos(t / 4) / 8
@@ -14,16 +14,16 @@ export default function Model(props) {
   })
   return (
     <group ref={group} {...props} dispose={null}>
-        <mesh
+      <mesh
         castShadow
         receiveShadow
-        geometry={nodes["810_merged_(repaired)"].geometry}
-        material={materials["material_1.001"]}
-        rotation={[-Math.PI / 1.15, -0.0, Math.PI/0.95]}
-        position={[0, 0, -5]}
-        />
-  </group>
+        geometry={nodes["zdillon90-2019_-_stlmesh"].geometry}
+        material={materials["Default OBJ"]}
+        rotation={[0.5, 3.1, 0]}
+        scale={[0.8, 0.8, 0.8]}
+      />
+    </group>
   );
 }
 
-useGLTF.preload("/Kong.glb");
+useGLTF.preload("/skyline.glb");
