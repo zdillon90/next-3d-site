@@ -58,7 +58,7 @@ export async function getServerSideProps() {
 function QuestionList ({ questions }) {
     return (
         <Flex flexDirection="column">
-            {questions.map(question => (
+            {questions.slice(0).reverse().map(question => (
                 <Question 
                     key={question.id}
                     userId={question.userId}
