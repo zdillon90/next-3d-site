@@ -29,14 +29,14 @@ export default function Overlay() {
             Cyber Kongz
           </a>
         </Link>
-        <Link href="/portfolio/sk" passHref>
+        <Link href="/portfolio/sl" passHref>
           <a style={{ position: 'absolute', bottom: 40, right: 300, fontSize: '20px' }}>
             Skyline
           </a>
         </Link>
-        <Link href="/portfolio/cv" passHref>
+        <Link href="/portfolio/mt" passHref>
           <a style={{ color: '#d3d3d3', position: 'absolute', bottom: 40, right: 40, fontSize: '20px' }}>
-            Code Vault
+            Move Tool
           </a>
         </Link>
     </div>
