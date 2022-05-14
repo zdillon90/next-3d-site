@@ -139,10 +139,6 @@ export default function Ama({ questions }) {
     const [question, setQuestion] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    // console.log(questions)
-    // console.log(users)
-    // const { questions, isLoading, isError } = useGetQuestions()
-    const { colorMode, toggleColorMode } = useColorMode()
 
     return (
     <>
@@ -150,18 +146,28 @@ export default function Ama({ questions }) {
           <a style={{ color: '#d3d3d3', position: 'absolute', top: 40, left: 40, fontSize: '20px' }}>ZHD</a>
         </Link>
         <Center>
-            <Box w='80vh' p='10' overflowY="auto" maxHeight="100vh">
-                {/* <header>
-                    <Button onClick={toggleColorMode}>
-                        Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-                    </Button>
-                </header> */}
-                <Heading p='2'>Ask Me Anything</Heading>
-                    <QuestionForm />
-                    <Center height='50px'>
-                        <Divider orientation='horizontal' />
-                    </Center>
-                <Heading p='2'>Questions</Heading>
+            <Box 
+                w='80vh' 
+                p='10' 
+                overflowY="auto" 
+                maxHeight="100vh"
+                sx={{
+                    '&::-webkit-scrollbar': {
+                      width: '16px',
+                      borderRadius: '8px',
+                      backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                    },
+                  }}
+            >
+                    <Heading p='2'>Ask Me Anything</Heading>
+                        <QuestionForm />
+                        <Center height='50px'>
+                            <Divider orientation='horizontal' />
+                        </Center>
+                    <Heading p='2'>Questions</Heading>
                 <QuestionList questions={questions} />
             </Box>
         </Center>
