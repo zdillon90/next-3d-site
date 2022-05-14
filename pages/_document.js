@@ -9,8 +9,7 @@ export default class Document extends NextDocument {
     return (
       <Html lang='en'>
         <Head />
-        <body>
-          {/* 👇 Here's the script */}
+        <body className={"bg-#4b4d52"}>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />
