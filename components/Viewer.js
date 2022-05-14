@@ -31,34 +31,10 @@ export default function Viewer() {
           rotation={[-1.95, 1.28, 1.96]}
           />
       <Suspense fallback={null}>
-        {/* <Environment files={['photo.png']} path="/public/" background /> */}
         <MyRotatingBox />
       </Suspense>
     </Canvas>
   )
-}
-
-function Bg() {
-  const texture = new THREE.TextureLoader().load( "/public/photo.jpeg" );
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set( 4, 4 );
-  return (
-    <mesh scale={100}>
-      <boxGeometry args={[1000, 1000, 1000]} />
-      <LayerMaterial side={THREE.BackSide}>
-        <Texture map={texture}/>
-        {/* <Depth colorB="red" colorA="skyblue" alpha={1} mode="normal" near={130} far={200} origin={[100, 100, -100]} /> */}
-        {/* <Noise mapping="local" type="white" scale={1000} colorA="white" colorB="black" mode="subtract" alpha={0.2} /> */}
-      </LayerMaterial>
-    </mesh>
-  )
-}
-
-function Rig({ v = new THREE.Vector3() }) {
-  return useFrame((state) => {
-    state.camera.position.lerp(v.set(state.mouse.x / 2, state.mouse.y / 2, 10), 0.05)
-  })
 }
 
 function MyRotatingBox() {
@@ -77,21 +53,4 @@ function MyRotatingBox() {
       <BlackHole />
     </mesh>
   );
-}
-
-function Bloom({ children }) {
-  const { gl, camera, size } = useThree()
-  const [scene, setScene] = useState()
-  const composer = useRef()
-  useEffect(() => void scene && composer.current.setSize(size.width, size.height), [size])
-  useFrame(() => scene && composer.current.render(), 1)
-  return (
-    <>
-      <scene ref={setScene}>{children}</scene>
-      <effectComposer ref={composer} args={[gl]}>
-        <renderPass attachArray="passes" scene={scene} camera={camera} />
-        <unrealBloomPass attachArray="passes" args={[undefined, 1.5, 1, 0]} />
-      </effectComposer>
-    </>
-  )
 }

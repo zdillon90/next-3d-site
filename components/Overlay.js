@@ -1,12 +1,6 @@
 import Link from 'next/link'
 
 export default function Overlay() {
-    let today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-  
-    today = mm + '/' + dd + '/' + yyyy;
     return (
       <div style={{ color: '#d3d3d3', position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
         <Link href="/" passHref>
