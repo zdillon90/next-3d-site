@@ -103,14 +103,14 @@ function QuestionForm () {
                     onChange={formik.handleChange}
                     value={formik.values.question}
                 />
-                <FormLabel>Name</FormLabel>
+                <FormLabel pt='4'>Name</FormLabel>
                 <Input 
                     id='name' 
                     type='name'
                     onChange={formik.handleChange} 
                     value={formik.values.name}
                 />
-                <FormLabel htmlFor='email'>Email address</FormLabel>
+                <FormLabel htmlFor='email' pt='4'>Email address</FormLabel>
                 <Input 
                     id='email' 
                     type='email'
@@ -151,11 +151,11 @@ export default function Ama({ questions }) {
         </Link>
         <Center>
             <Box w='80vh' p='10' overflowY="auto" maxHeight="100vh">
-                <header>
+                {/* <header>
                     <Button onClick={toggleColorMode}>
                         Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
                     </Button>
-                </header>
+                </header> */}
                 <Heading p='2'>Ask Me Anything</Heading>
                     <QuestionForm />
                     <Center height='50px'>
@@ -163,10 +163,6 @@ export default function Ama({ questions }) {
                     </Center>
                 <Heading p='2'>Questions</Heading>
                 <QuestionList questions={questions} />
-                {/* <Question 
-                    question={questions[0].question} 
-                    answer={questions[0].answer} 
-                /> */}
             </Box>
         </Center>
     </>
