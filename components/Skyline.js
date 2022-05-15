@@ -23,7 +23,9 @@ export default function Model(props) {
         material={materials["Default OBJ"]}
         rotation={[0.5, 3.1, 0]}
         scale={[0.8, 0.8, 0.8]}
-      />
+      >
+        <meshStandardMaterial color={'grey'} roughness={0.5} />
+      </mesh>
     </group>
   );
 }
