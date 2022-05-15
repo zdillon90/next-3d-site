@@ -1,5 +1,5 @@
-import React from 'react';
- import { Formik, Field, Form, ErrorMessage } from 'formik';
+import React, {useState} from 'react';
+ import { Formik } from 'formik';
  import * as Yup from 'yup';
 
  import {
@@ -10,11 +10,31 @@ import React from 'react';
   Flex,
   Textarea,
   Button,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 
-// TODO: Add alert when question is submitted
+function successAlert() {
+  return (
+    <Alert status='success'>
+    <AlertIcon />
+      Question submitted! Check back later for an answer.
+    </Alert>
+  );
+}
+
+function errorAlert() {
+  return (
+    <Alert status='error'>
+    <AlertIcon />
+      Something went wrong. Please try again.
+    </Alert>
+  );
+}
+
  
- export default function SignupForm() {
+ export default function QuestionForm() {
+  const [result, setResult] = useState(undefined);
   return (
     <Formik
       initialValues={{ question: '', name: '', email: '' }}
@@ -34,8 +54,12 @@ import React from 'react';
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values),
           })
+          .then(() => {
+            setResult(true);
+          })
         } catch (err) {
           console.error(err)
+          setResult(false);
         }
     }}
     >
@@ -74,6 +98,7 @@ import React from 'react';
             ) : null}
 
             <FormHelperText>I&apos;ll never share your email.</FormHelperText>
+            {result === true ? successAlert() : result === false ? errorAlert() : null}
               <Flex justify='flex-end'>
                 <Button
                   mt={4}
