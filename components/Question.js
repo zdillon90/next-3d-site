@@ -21,8 +21,8 @@ function useGetUser (id) {
   
 export default function Question({question, answer, userId}) {
     const { user, isLoading, isError } = useGetUser(userId)
-    if (isLoading) return <div>failed to load</div>
-    if (isError) return <div>loading...</div>
+    if (isLoading) return <div>Loading...</div>
+    if (isError) return <div>Failed to Load</div>
     return (
         <Box p="5"  borderWidth="2px">
             <Text
