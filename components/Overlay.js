@@ -25,7 +25,7 @@ export default function Overlay() {
         </Link>
         <Link href="/portfolio/sl" passHref>
           <a style={{ position: 'absolute', bottom: 40, right: 300, fontSize: '20px' }}>
-            Skyline
+            GitHub Skylines
           </a>
         </Link>
         <Link href="/portfolio/mt" passHref>
