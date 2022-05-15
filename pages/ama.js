@@ -5,6 +5,7 @@ import { useFormik } from 'formik'
 import { PrismaClient } from '@prisma/client'
 import Link from 'next/link'
 import Question from '../components/Question'
+import QuestionForm from '../components/QuestionForm'
 import {
     FormControl,
     FormLabel,
@@ -71,69 +72,67 @@ function QuestionList ({ questions }) {
 }
 
 
-function QuestionForm () {
-    const formik = useFormik({
-        initialValues: {
-            question: '',
-            name: '',
-            email: '',
-        },
-        onSubmit: async (values) => {
-            // alert(JSON.stringify(values, null, 2))
-            try {
-                // const body = { question, name, email }
-                await fetch(`/api/postQuestion`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(values),
-                })
-            } catch (err) {
-                console.error(err)
-            }
-        },
-    })
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            <FormControl>
-                <FormLabel>Question</FormLabel>
-                <Textarea 
-                    id='question'
-                    type='text'
-                    placeholder='Feel free to ask your question here' 
-                    onChange={formik.handleChange}
-                    value={formik.values.question}
-                />
-                <FormLabel pt='4'>Name</FormLabel>
-                <Input 
-                    id='name' 
-                    type='name'
-                    onChange={formik.handleChange} 
-                    value={formik.values.name}
-                />
-                <FormLabel htmlFor='email' pt='4'>Email address</FormLabel>
-                <Input 
-                    id='email' 
-                    type='email'
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                />
-                <FormHelperText>I&apos;ll never share your email.</FormHelperText>
-                <Flex justify='flex-end'>
-                    <Button
-                        // disabled={!question || !name || !email}
-                        mt={4}
-                        // bg='white'
-                        variant='outline'
-                        // isLoading={props.isSubmitting}
-                        type='submit'
-                    >
-                        Submit
-                    </Button>
-                </Flex>
-            </FormControl>
-        </form>
-    )
-}
+// function QuestionForm () {
+//     const formik = useFormik({
+//         initialValues: {
+//             question: '',
+//             name: '',
+//             email: '',
+//         },
+//         onSubmit: async (values) => {
+//             try {
+//                 await fetch(`/api/postQuestion`, {
+//                     method: 'POST',
+//                     headers: { 'Content-Type': 'application/json' },
+//                     body: JSON.stringify(values),
+//                 })
+//             } catch (err) {
+//                 console.error(err)
+//             }
+//         },
+//     })
+//     return (
+//         <form onSubmit={formik.handleSubmit}>
+//             <FormControl>
+//                 <FormLabel>Question</FormLabel>
+//                 <Textarea 
+//                     id='question'
+//                     type='text'
+//                     placeholder='Feel free to ask your question here' 
+//                     onChange={formik.handleChange}
+//                     value={formik.values.question}
+//                 />
+//                 <FormLabel pt='4'>Name</FormLabel>
+//                 <Input 
+//                     id='name' 
+//                     type='name'
+//                     onChange={formik.handleChange} 
+//                     value={formik.values.name}
+//                 />
+//                 <FormLabel htmlFor='email' pt='4'>Email address</FormLabel>
+//                 <Input 
+//                     id='email' 
+//                     type='email'
+//                     onChange={formik.handleChange}
+//                     value={formik.values.email}
+//                 />
+//                 <FormHelperText>I&apos;ll never share your email.</FormHelperText>
+//                 <Flex justify='flex-end'>
+//                     <Button
+//                         // disabled={!question || !name || !email}
+//                         mt={4}
+//                         // bg='white'
+//                         variant='outline'
+//                         // isLoading={props.isSubmitting}
+//                         type='submit'
+//                     >
+//                         Submit
+//                     </Button>
+//                 </Flex>
+//             </FormControl>
+//         </form>
+//     )
+// }
 
 export default function Ama({ questions }) {
     const [question, setQuestion] = useState('')
